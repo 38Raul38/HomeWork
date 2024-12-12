@@ -1,0 +1,129 @@
+//Task 1
+
+// int x = Convert.ToInt32(Console.ReadLine());
+//
+// if (x < 100 && x > 1)
+// {
+//     if (x % 15 == 0)
+//     {
+//         Console.WriteLine("Fizz Buzz");
+//     } 
+//     else if (x % 3 == 0)
+//     {
+//         Console.WriteLine("Fizz");
+//     }
+//     else if (x % 5 == 0)
+//     {
+//         Console.WriteLine("Buzz");
+//     }
+// }
+
+        //Task 2
+
+// double num = double.Parse(Console.ReadLine());
+// int percent = int.Parse(Console.ReadLine());
+//
+// double result = (num * percent) / 100;
+// Console.WriteLine(result);
+
+                //Task 3
+
+// Console.Write("Enter num1: ");
+// int num1 = int.Parse(Console.ReadLine());
+// Console.Write("Enter num2: ");
+// int num2 = int.Parse(Console.ReadLine());
+// Console.Write("Enter num3: ");
+// int num3 = int.Parse(Console.ReadLine());
+// Console.Write("Enter num4: ");
+// int num4 = int.Parse(Console.ReadLine());
+//
+// int result = num1 * 1000 + num2 * 100 + num3 * 10 + num4;
+// Console.WriteLine($"Result = {result}");
+
+
+            //Task 4
+
+// Console.Write("Enter number: ");
+// string number = Console.ReadLine();
+//
+// Console.Write("Enter digit_1: ");
+// int digit_1 = int.Parse(Console.ReadLine());
+//
+// Console.Write("Enter digit_2: ");
+// int digit_2 = int.Parse(Console.ReadLine());
+//
+// if ( number.Length == 6 )
+// {
+//     char[] digits = number.ToCharArray();
+//     char temp = digits[digit_1 - 1];
+//     digits[digit_1 - 1] = digits[digit_2 - 1];
+//     digits[digit_2 - 1] = temp;
+//
+//     string result = new string(digits);
+//     Console.WriteLine($"Result: {result}");
+// }
+
+
+//Task 5
+while (true) 
+{ 
+    Console.Write("Enter a date (dd.MM.yyyy): "); 
+    string input_date = Console.ReadLine(); 
+
+    if (DateTime.TryParseExact(input_date, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime date)) 
+    { 
+        string dayOfWeek = date.DayOfWeek.ToString();
+        string season = (date.Month == 12 || date.Month == 1 || date.Month == 2) ? "Winter" : 
+            (date.Month >= 3 && date.Month <= 5) ? "Spring" : 
+            (date.Month >= 6 && date.Month <= 8) ? "Summer" : "Autumn"; 
+        Console.WriteLine($"{season} {dayOfWeek}"); 
+    } 
+    else 
+    { 
+        Console.WriteLine("Invalid date"); 
+    } 
+}
+
+            //Task 6
+// Console.Write("Enter degree: ");
+// double degree = double.Parse(Console.ReadLine());
+//
+// Console.Write("Choose number. 1 | 2: ");
+// int choose = int.Parse(Console.ReadLine());
+//
+// if (choose == 1)
+// {
+//     double result1 = (degree * 1.8) + 32;
+//     Console.WriteLine($" Celsius = {result1}");
+// }
+// else if (choose == 2)
+// {
+//     double result2 = (degree - 32) / 1.8;
+//     Console.WriteLine($" Fahrenheit = {result2}");
+// }
+// else
+// {
+//     Console.WriteLine("Wrong choose");
+// }
+
+//Task 7
+
+// Console.Write("Start: ");
+// int start = int.Parse(Console.ReadLine());
+// Console.Write("End: ");
+// int end = int.Parse(Console.ReadLine());
+//
+// int n_start = Math.Min(start, end);
+// int n_end = Math.Max(start, end);
+//
+// Console.WriteLine($"Normalized range: {n_start} to {n_end}");
+//
+// for (int i = n_start; i < n_end; i++)
+// {
+//     if (i % 2 == 0)
+//     {
+//         Console.WriteLine(i);
+//     }
+// }
+
+
