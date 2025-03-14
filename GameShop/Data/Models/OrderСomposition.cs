@@ -1,0 +1,16 @@
+namespace EF_Core_Project.Data.Models;
+
+public class OrderСomposition
+{
+    public int Id { get; set; }
+    
+    public string OrderId { get; set; }
+    public Order Order { get; set; }
+    
+    public string GameId { get; set; }
+    public Game Game { get; set; }
+    
+    public int Count { get; set; }
+    
+    public decimal TotalAmount { get; set; }
+}
