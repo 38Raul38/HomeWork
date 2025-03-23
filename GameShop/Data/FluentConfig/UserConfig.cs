@@ -18,7 +18,15 @@ public class UserConfig : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(100);
         
+        builder.Property(u => u.Password)
+            .IsRequired()
+            .HasMaxLength(100);
+        
         builder.Property(u => u.Balance)
             .HasColumnType("decimal(18,2)");
+        
+        builder.HasMany(u => u.Orders)
+            .WithOne(o => o.User)
+            .HasForeignKey(o => o.UserId);
     }
 }

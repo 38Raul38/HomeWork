@@ -4,19 +4,16 @@ using CodeFirst.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace EF_Core_Project.Migrations
 {
-    [DbContext(typeof(ShowroomContext))]
-    [Migration("20250314195818_First")]
-    partial class First
+    [DbContext(typeof(GameShopContext))]
+    partial class GameShopContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,10 +84,15 @@ namespace EF_Core_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId1")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("totalAmount")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Orders");
                 });
@@ -129,7 +131,7 @@ namespace EF_Core_Project.Migrations
 
                     b.HasIndex("OrderId1");
 
-                    b.ToTable("DealerOrderСompositions");
+                    b.ToTable("DealerOrderCompositions");
                 });
 
             modelBuilder.Entity("EF_Core_Project.Data.Models.Platform", b =>
@@ -168,6 +170,10 @@ namespace EF_Core_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -190,6 +196,17 @@ namespace EF_Core_Project.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("EF_Core_Project.Data.Models.Order", b =>
+                {
+                    b.HasOne("EF_Core_Project.Data.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EF_Core_Project.Data.Models.OrderСomposition", b =>
@@ -224,6 +241,11 @@ namespace EF_Core_Project.Migrations
             modelBuilder.Entity("EF_Core_Project.Data.Models.Platform", b =>
                 {
                     b.Navigation("Games");
+                });
+
+            modelBuilder.Entity("EF_Core_Project.Data.Models.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

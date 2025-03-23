@@ -25,21 +25,6 @@ namespace EF_Core_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    totalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Platforms",
                 columns: table => new
                 {
@@ -60,6 +45,7 @@ namespace EF_Core_Project.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -96,7 +82,29 @@ namespace EF_Core_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DealerOrderСompositions",
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId1 = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    totalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DealerOrderCompositions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -110,15 +118,15 @@ namespace EF_Core_Project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DealerOrderСompositions", x => x.Id);
+                    table.PrimaryKey("PK_DealerOrderCompositions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DealerOrderСompositions_Game_GameId1",
+                        name: "FK_DealerOrderCompositions_Game_GameId1",
                         column: x => x.GameId1,
                         principalTable: "Game",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DealerOrderСompositions_Orders_OrderId1",
+                        name: "FK_DealerOrderCompositions_Orders_OrderId1",
                         column: x => x.OrderId1,
                         principalTable: "Orders",
                         principalColumn: "Id",
@@ -126,13 +134,13 @@ namespace EF_Core_Project.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerOrderСompositions_GameId1",
-                table: "DealerOrderСompositions",
+                name: "IX_DealerOrderCompositions_GameId1",
+                table: "DealerOrderCompositions",
                 column: "GameId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerOrderСompositions_OrderId1",
-                table: "DealerOrderСompositions",
+                name: "IX_DealerOrderCompositions_OrderId1",
+                table: "DealerOrderCompositions",
                 column: "OrderId1");
 
             migrationBuilder.CreateIndex(
@@ -144,16 +152,18 @@ namespace EF_Core_Project.Migrations
                 name: "IX_Game_PlatformId",
                 table: "Game",
                 column: "PlatformId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId1",
+                table: "Orders",
+                column: "UserId1");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DealerOrderСompositions");
-
-            migrationBuilder.DropTable(
-                name: "Users");
+                name: "DealerOrderCompositions");
 
             migrationBuilder.DropTable(
                 name: "Game");
@@ -166,6 +176,9 @@ namespace EF_Core_Project.Migrations
 
             migrationBuilder.DropTable(
                 name: "Platforms");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
