@@ -32,7 +32,7 @@ public class SignUp
 
             }
 
-        
+            
 
             Console.WriteLine("Enter Password");
             var password = Console.ReadLine();
@@ -109,10 +109,63 @@ public class SignIn
             Console.WriteLine("Incorrect password");
             return;
         }
-
-        _context.Users.Add(user);
-        _context.SaveChanges();
         
         Console.WriteLine("Login successful");
+
+        while (true)
+        {
+            Console.WriteLine("1. Get Game Catalog");
+            Console.WriteLine("2. Top Up Balance");
+            Console.WriteLine("3. Buy a Game");
+            Console.WriteLine("Exit");
+            Console.Write("Enter choose: ");
+
+            var choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    new Methods(_context).GetGameCatalog();
+                    break;
+                case "2":
+                    Console.WriteLine("Enter amount: ");
+                    if(decimal.TryParse(Console.ReadLine(), out var amount))
+                        new Methods(_context).TopUpBalance(amount, user.Id);
+                    else
+                        Console.WriteLine("Invalid Input");
+                    break;
+                case "3":
+                    Console.WriteLine("Enter Game Id: ");
+                    if (!int.TryParse(Console.ReadLine(), out var gameId))
+                    {
+                        Console.WriteLine("Invalid Game Id");
+                        break;
+                    }
+
+                    Console.WriteLine("Enter quantity");
+                    if (!int.TryParse(Console.ReadLine(), out var count))
+                    {
+                        Console.WriteLine("Invalid Input");
+                        break;
+                    }
+
+
+                    try
+                    {
+                        new Methods(_context).BuyGame(user.Id, gameId, count);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    break;
+                case "4":
+                    return;
+                default:
+                    Console.WriteLine("Error! Try again");
+                    break;
+            }
+        }
+
     }
 }

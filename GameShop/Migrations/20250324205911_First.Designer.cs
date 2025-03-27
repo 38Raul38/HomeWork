@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF_Core_Project.Migrations
 {
     [DbContext(typeof(GameShopContext))]
-    [Migration("20250322171602_First")]
+    [Migration("20250324205911_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -52,7 +52,7 @@ namespace EF_Core_Project.Migrations
 
                     b.HasIndex("PlatformId");
 
-                    b.ToTable("Game");
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("EF_Core_Project.Data.Models.Genre", b =>
@@ -83,11 +83,7 @@ namespace EF_Core_Project.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("totalAmount")
@@ -95,7 +91,7 @@ namespace EF_Core_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -111,18 +107,10 @@ namespace EF_Core_Project.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<string>("GameId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GameId1")
+                    b.Property<int>("GameId")
                         .HasColumnType("int");
 
-                    b.Property<string>("OrderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderId1")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
@@ -130,9 +118,9 @@ namespace EF_Core_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId1");
+                    b.HasIndex("GameId");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("DealerOrderCompositions");
                 });
@@ -205,7 +193,7 @@ namespace EF_Core_Project.Migrations
                 {
                     b.HasOne("EF_Core_Project.Data.Models.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -216,13 +204,13 @@ namespace EF_Core_Project.Migrations
                 {
                     b.HasOne("EF_Core_Project.Data.Models.Game", "Game")
                         .WithMany()
-                        .HasForeignKey("GameId1")
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EF_Core_Project.Data.Models.Order", "Order")
                         .WithMany("OrderСomposition")
-                        .HasForeignKey("OrderId1")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

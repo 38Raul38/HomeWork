@@ -2,26 +2,29 @@
 using Microsoft.EntityFrameworkCore;
 using CodeFirst.Data.Contexts;
 using EF_Core_Project;
+using EF_Core_Project.Data.Models;
 
 class Program
 {
     static void Main()
     {
         var options = new DbContextOptionsBuilder<GameShopContext>()
-            .UseSqlServer("Data Source=localhost,56210;Initial Catalog=GameShop;Trusted_Connection=True;TrustServerCertificate=True")
+            .UseSqlServer(
+                "Data Source=localhost,56210;Initial Catalog=GameShop;Trusted_Connection=True;TrustServerCertificate=True")
             .Options;
 
         using var context = new GameShopContext(options);
+        
 
         while (true)
         {
             Console.WriteLine("1. Registration");
             Console.WriteLine("2. Login");
             Console.WriteLine("3. Exit");
-            Console.Write("Enter choise: ");
-
+            Console.Write("Enter choose: ");
+        
             var choice = Console.ReadLine();
-
+        
             switch (choice)
             {
                 case "1":

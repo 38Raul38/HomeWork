@@ -17,7 +17,7 @@ public class OrderCompositionConfig : IEntityTypeConfiguration<OrderСomposition
             .HasColumnType("decimal(18,2)");
         
         builder.HasOne(oc => oc.Order)
-            .WithMany(o => o.OrderСomposition)
+            .WithMany(o => o.OrderСompositions)
             .HasForeignKey(oc => oc.OrderId);
         
         builder.HasOne(oc => oc.Game)

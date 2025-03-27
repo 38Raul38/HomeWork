@@ -16,7 +16,7 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
         builder.Property(o => o.totalAmount)
             .HasColumnType("decimal(18,2)");
         
-        builder.HasMany(o => o.OrderСomposition)
+        builder.HasMany(o => o.OrderСompositions)
             .WithOne(o => o.Order)
             .HasForeignKey(o => o.OrderId);
     }

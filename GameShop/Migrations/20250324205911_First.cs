@@ -54,7 +54,7 @@ namespace EF_Core_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Game",
+                name: "Games",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -66,15 +66,15 @@ namespace EF_Core_Project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Game", x => x.Id);
+                    table.PrimaryKey("PK_Games", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Game_Genres_GenreId",
+                        name: "FK_Games_Genres_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Game_Platforms_PlatformId",
+                        name: "FK_Games_Platforms_PlatformId",
                         column: x => x.PlatformId,
                         principalTable: "Platforms",
                         principalColumn: "Id",
@@ -87,8 +87,7 @@ namespace EF_Core_Project.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId1 = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     totalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -96,8 +95,8 @@ namespace EF_Core_Project.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Users_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Orders_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -109,10 +108,8 @@ namespace EF_Core_Project.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderId1 = table.Column<int>(type: "int", nullable: false),
-                    GameId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GameId1 = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    GameId = table.Column<int>(type: "int", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -120,43 +117,43 @@ namespace EF_Core_Project.Migrations
                 {
                     table.PrimaryKey("PK_DealerOrderCompositions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DealerOrderCompositions_Game_GameId1",
-                        column: x => x.GameId1,
-                        principalTable: "Game",
+                        name: "FK_DealerOrderCompositions_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DealerOrderCompositions_Orders_OrderId1",
-                        column: x => x.OrderId1,
+                        name: "FK_DealerOrderCompositions_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerOrderCompositions_GameId1",
+                name: "IX_DealerOrderCompositions_GameId",
                 table: "DealerOrderCompositions",
-                column: "GameId1");
+                column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerOrderCompositions_OrderId1",
+                name: "IX_DealerOrderCompositions_OrderId",
                 table: "DealerOrderCompositions",
-                column: "OrderId1");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Game_GenreId",
-                table: "Game",
+                name: "IX_Games_GenreId",
+                table: "Games",
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Game_PlatformId",
-                table: "Game",
+                name: "IX_Games_PlatformId",
+                table: "Games",
                 column: "PlatformId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserId1",
+                name: "IX_Orders_UserId",
                 table: "Orders",
-                column: "UserId1");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -166,7 +163,7 @@ namespace EF_Core_Project.Migrations
                 name: "DealerOrderCompositions");
 
             migrationBuilder.DropTable(
-                name: "Game");
+                name: "Games");
 
             migrationBuilder.DropTable(
                 name: "Orders");
