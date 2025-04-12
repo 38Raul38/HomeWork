@@ -1,0 +1,14 @@
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.AssemblyInfoInputs.cache
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.AssemblyInfo.cs
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.csproj.CoreCompileInputs.cache
+C:\Users\Huawei\RiderProjects\Async\Async\bin\Debug\net8.0\Async.exe
+C:\Users\Huawei\RiderProjects\Async\Async\bin\Debug\net8.0\Async.deps.json
+C:\Users\Huawei\RiderProjects\Async\Async\bin\Debug\net8.0\Async.runtimeconfig.json
+C:\Users\Huawei\RiderProjects\Async\Async\bin\Debug\net8.0\Async.dll
+C:\Users\Huawei\RiderProjects\Async\Async\bin\Debug\net8.0\Async.pdb
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.dll
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\refint\Async.dll
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.pdb
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\Async.genruntimeconfig.cache
+C:\Users\Huawei\RiderProjects\Async\Async\obj\Debug\net8.0\ref\Async.dll
