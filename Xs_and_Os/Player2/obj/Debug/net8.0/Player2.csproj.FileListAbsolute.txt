@@ -1,0 +1,14 @@
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\bin\Debug\net8.0\Player2.exe
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\bin\Debug\net8.0\Player2.deps.json
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\bin\Debug\net8.0\Player2.runtimeconfig.json
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\bin\Debug\net8.0\Player2.dll
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\bin\Debug\net8.0\Player2.pdb
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.AssemblyInfoInputs.cache
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.AssemblyInfo.cs
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.csproj.CoreCompileInputs.cache
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.dll
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\refint\Player2.dll
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.pdb
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\Player2.genruntimeconfig.cache
+C:\Users\Huawei\RiderProjects\Xs_and_Os\Player2\obj\Debug\net8.0\ref\Player2.dll
