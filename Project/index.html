@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World News</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <script src="newsApi.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <span class="logo-text">World News</span>
+
+      <ul class="nav-links" id="categoryMenu">
+        <li><a href="#" class="nav-link active" data-category="general">General</a></li>
+        <li><a href="#" class="nav-link" data-category="sports">Sports</a></li>
+        <li><a href="#" class="nav-link" data-category="technology">Technology</a></li>
+        <li><a href="#" class="nav-link" data-category="business">Business</a></li>
+        <li><a href="#" class="nav-link" data-category="science">Science</a></li>
+        <li><a href="#" class="nav-link" data-category="entertainment">Entertainment</a></li>
+      </ul>
+
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+    </div>
+  </nav>
+
+  <main>
+    <h2 id="category-title" class="category-title">General News</h2>
+
+    <div id="loader" class="loader hidden">
+      <div class="spinner"></div>
+    </div>
+
+    <div id="news-container" class="news-container"></div>
+
+    <button id="load-more-btn" class="load-more hidden">Load More</button>
+  </main>
+</body>
+</html>
