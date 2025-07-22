@@ -1,3 +1,4 @@
+import "@/lib/i18n"; // <--- добавь эту строку!
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/HomeCompon/Header'
 import Home from './pages/Home'
@@ -6,20 +7,23 @@ import Reports from './pages/Reports'
 
 function App() {
   return (
-    <>
-      {/* Шапка сайта */}
-      <Header />
+    <div className="relative min-h-screen overflow-y-auto">
+      {/* Фоновый рисунок */}
+      <div className="bg-[url('./public/image.png')] bg-cover bg-center blur-xs absolute inset-0 -z-10" />
 
-      {/* Контент страниц */}
-      <main className="p-4 max-w-4xl mx-auto">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/food" element={<Food />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/button" element={<Food />} />
-        </Routes>
-      </main>
-    </>
+      {/* Контент поверх фона */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header />
+
+        <main className="flex-grow px-4 max-w-[120rem] mx-auto w-full">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/food" element={<Food />} />
+            <Route path="/reports" element={<Reports />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
   )
 }
 

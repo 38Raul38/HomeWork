@@ -1,22 +1,25 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onTabChange: (tab: string) => void
 }
 
+const tabKeys = ["today", "recent", "frequent"];
+
 const FoodNavBar = ({ onTabChange }: Props) => {
-  const [activeTab, setActiveTab] = useState("Today")
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState(tabKeys[0]);
 
   const handleClick = (tab: string) => {
-    setActiveTab(tab)
-    onTabChange(tab)
-  }
+    setActiveTab(tab);
+    onTabChange(tab);
+  };
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Food</h1>
       <div className="flex space-x-6 border-b border-gray-200">
-        {["Today", "Recent", "Frequent"].map((tab) => (
+        {tabKeys.map((tab) => (
           <button
             key={tab}
             onClick={() => handleClick(tab)}
@@ -26,12 +29,12 @@ const FoodNavBar = ({ onTabChange }: Props) => {
                 : "text-gray-600 hover:text-blue-500"
             }`}
           >
-            {tab}
+            {t(tab)}
           </button>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FoodNavBar
+export default FoodNavBar;

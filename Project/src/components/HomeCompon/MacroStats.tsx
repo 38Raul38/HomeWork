@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 type MacroStatsProps = {
   protein: number;
@@ -21,13 +22,13 @@ const MacroStats: React.FC<MacroStatsProps> = ({
 }) => {
   const getPercent = (value: number, goal: number): number =>
     Math.min((value / goal) * 100, 100);
-
+const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-center w-full space-y-4">
+    <div className="flex flex-col items-center justify-center w-full space-y-4 select-none">
       {/* Калории и макросы сверху */}
       <div className="text-center space-y-1">
         <p className="text-[48px] font-extrabold leading-tight text-black">{calories}</p>
-        <p className="text-sm text-gray-500 mb-2">калорий</p>
+        <p className="text-sm text-gray-500 mb-2">calories</p>
         <div className="flex gap-4 text-sm font-medium text-black">
           <span>
             <span className="font-bold text-blue-500">{protein}г</span>{" "}
@@ -49,7 +50,7 @@ const MacroStats: React.FC<MacroStatsProps> = ({
         {/* Белки */}
         <div>
           <div className="flex justify-between text-sm mb-1">
-            <span className="flex items-center gap-1">🥩 Белки</span>
+            <span className="flex items-center gap-1">🥩 {t('protein')}</span>
             <span className="text-blue-500 font-semibold">
               {protein}г / {proteinGoal}г
             </span>
@@ -65,7 +66,7 @@ const MacroStats: React.FC<MacroStatsProps> = ({
         {/* Жиры */}
         <div>
           <div className="flex justify-between text-sm mb-1">
-            <span className="flex items-center gap-1">🧈 Жиры</span>
+            <span className="flex items-center gap-1">🧈 {t('fats')}</span>
             <span className="text-yellow-500 font-semibold">
               {fat}г / {fatGoal}г
             </span>
@@ -81,7 +82,7 @@ const MacroStats: React.FC<MacroStatsProps> = ({
         {/* Углеводы */}
         <div>
           <div className="flex justify-between text-sm mb-1">
-            <span className="flex items-center gap-1">🍞 Углеводы</span>
+            <span className="flex items-center gap-1">🍞 {t('carbs')}</span>
             <span className="text-green-500 font-semibold">
               {carbs}г / {carbsGoal}г
             </span>
