@@ -18,6 +18,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
   const { t } = useTranslation();
   const [form, setForm] = useState<AuthForm>({ email: "", password: "" });
   const [errors, setErrors] = useState<AuthFormErrors>({});
+  const [mode, setMode] = useState<"login" | "register">("login");
 
   if (!open) return null;
 
@@ -29,13 +30,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
       const zodErrors: AuthFormErrors = {};
       result.error.issues.forEach(err => {
         const field = err.path[0] as keyof AuthForm;
-        zodErrors[field] = t(err.message); // вот тут переводим!
+        zodErrors[field] = t(err.message);
       });
       setErrors(zodErrors);
       return;
     }
+
     setErrors({});
-    alert("Success! (логика авторизации здесь)");
+    alert(`${mode === "login" ? "Login" : "Register"} success!`);
     onClose();
   };
 
@@ -48,7 +50,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
         >
           &times;
         </button>
-        <h2 className="text-xl font-bold mb-4 text-center">{t("login_register")}</h2>
+        <h2 className="text-xl font-bold mb-4 text-center">
+          {mode === "login" ? t("login") : t("register")}
+        </h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
           <div>
             <input
@@ -82,11 +86,31 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
             type="submit"
             className="bg-blue-600 text-white py-2 rounded-lg font-semibold"
           >
-            {t("login")}
+            {mode === "login" ? t("login") : t("register")}
           </button>
         </form>
         <div className="mt-4 text-center text-gray-500 text-sm">
-          {t("no_account")} <a href="#" className="text-blue-600 hover:underline">{t("register")}</a>
+          {mode === "login" ? (
+            <>
+              {t("no_account")}{" "}
+              <button
+                onClick={() => setMode("register")}
+                className="text-blue-600 hover:underline"
+              >
+                {t("register")}
+              </button>
+            </>
+          ) : (
+            <>
+              {t("have_account")}{" "}
+              <button
+                onClick={() => setMode("login")}
+                className="text-blue-600 hover:underline"
+              >
+                {t("login")}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

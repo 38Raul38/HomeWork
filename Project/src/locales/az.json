@@ -73,5 +73,11 @@
   "password_min": "Şifrə ən azı 8 simvol olmalıdır",
   "password_upper": "Şifrə ən azı bir böyük hərf olmalıdır",
   "password_digit": "Şifrə ən azı bir rəqəm olmalıdır",
-  "password_letters": "Şifrə hərflərdən ibarət olmalıdır"
+  "password_letters": "Şifrə hərflərdən ibarət olmalıdır",
+  "login": "Daxil ol",
+  "register": "Qeydiyyat",
+  "email": "Email",
+  "password": "Şifrə",
+  "no_account": "Hesabınız yoxdur?",
+  "have_account": "Artıq hesabınız var?"
 }
