@@ -1,82 +1,266 @@
-﻿var park = new Park();
+﻿
+Park park = new Park();
+bool exit = false;
+while (!exit)
+{
+    Console.WriteLine
+    ("Select action\n " +
+     "1. Add transport\n" +
+     " 2. Delete transport\n" +
+     " 3. Show All Transport\n" +
+     " 4. Edit Transport\n" +
+     " 5. Exit");
 
-var car1 = new Car(FuelType.Diesel, BodyType.Sedan);
-var bus1 = new Bus(FuelType.Diesel, BodyType.Sedan, 28);
+    int choose = int.Parse(Console.ReadLine());
+    switch (choose)
+    {
+        case 1:
+            park.AddTransport();
+            break;
+        case 2:
+            park.RemoveTransport();
+            break;
+        case 3:
+            park.ShowAllTransport();
+            break;
+        case 4:
+            park.EditTransport();
+            break;
+        case 5:
+            exit = true;
+            break;
+        default:
+            Console.WriteLine("Wrong choose!!!");
+            break;
+    }
+}
 
-park.AddTransport(car1);
-park.AddTransport(bus1);
-
-var bus2 = new Bus(FuelType.Petrol, BodyType.Coupe, 30);
-park.EditTransport(bus1, bus2);
-
-park.RemoveTransport(car1);
 
 
 class Park
 {
-    public List<Transport> Vehicles = [];
+    public List<Transport> Vehicles = new List<Transport>();
 
-     public void AddTransport(Transport transport)
+
+    public void ShowAllTransport()
     {
-        Vehicles.Add(transport);
-        Console.WriteLine("Transport Added");
+        if (Vehicles.Count == 0)
+        {
+            Console.WriteLine("No vehicles in the park.");
+            return;
+        }
+
+        for (int i = 0; i < Vehicles.Count; i++)
+        {
+            Console.WriteLine($"{i + 1})");
+            Vehicles[i].ShowInfo();
+            Console.WriteLine();
+        }
     }
 
-    public void RemoveTransport(Transport transport)
+    public void AddTransport()
     {
-        Vehicles.Remove(transport);
-        Console.WriteLine("Transport Removed");
+        Console.WriteLine("Select type of vehicle:");
+        Console.WriteLine("1. Car");
+        Console.WriteLine("2. Bus");
+        Console.Write("Enter choice to Add: ");
+        string vehicles_type = Console.ReadLine();
+
+        int maxSpeed;
+        while (true)
+        {
+            Console.WriteLine("Enter max speed: ");
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out maxSpeed))
+            {
+                break;
+            }
+
+            Console.WriteLine("Invalid input! Please enter a valid speed.");
+        }
+
+        switch (vehicles_type)
+        {
+            case "1":
+                FuelType fuel;
+                while (true)
+                {
+                    Console.WriteLine("Enter Fuel (1 - Gas, 2 - Diesel, 3 - Petrol):");
+                    string input = Console.ReadLine();
+                    if (int.TryParse(input, out int fuelValue) && Enum.IsDefined(typeof(FuelType), fuelValue))
+                    {
+                        fuel = (FuelType)fuelValue;
+                        break;
+                    }
+
+                    Console.WriteLine("Invalid input! Please enter a valid Fuel Type.");
+                }
+
+                Vehicles.Add(new Car("Car", fuel, maxSpeed));
+                Console.WriteLine("Car added succesfully!!!");
+                break;
+
+            case "2":
+                int capacity;
+                while (true)
+                {
+                    Console.WriteLine("Enter Capacity: ");
+                    string input = Console.ReadLine();
+                    if (int.TryParse(input, out capacity))
+                    {
+                        break;
+                    }
+
+                    Console.WriteLine("Invalid input! Please enter a valid Capacity.");
+                }
+
+                Vehicles.Add(new Bus("Bus", capacity, maxSpeed));
+                break;
+        }
     }
 
-    public void EditTransport(Transport oldtransport, Transport newtransport)
+
+    public void RemoveTransport()
     {
-        int index = Vehicles.IndexOf(oldtransport);
-        Vehicles[index] = newtransport;
-        Console.WriteLine("Transport Edited");
+        ShowAllTransport();
+        Console.WriteLine("Enter index to Remove the transport: ");
+        int index = int.Parse(Console.ReadLine());
+
+        if (index > 0 && index <= Vehicles.Count)
+        {
+            Vehicles.RemoveAt(index - 1);
+        }
+        else
+        {
+            Console.WriteLine("Invalid Input");
+        }
+    }
+
+    public void EditTransport()
+    {
+
+        ShowAllTransport();
+        Console.WriteLine("Enter index to Edit the transport: ");
+        int index = int.Parse(Console.ReadLine());
+
+        if (index > 0 && index <= Vehicles.Count)
+        {
+            Console.WriteLine("Select type of the new vehicle:");
+            Console.WriteLine("1. Car");
+            Console.WriteLine("2. Bus");
+            Console.Write("Enter choice: ");
+            string vehicles_type = Console.ReadLine();
+
+            int maxSpeed;
+            while (true)
+            {
+                Console.Write("Enter  new max speed: ");
+                if (int.TryParse(Console.ReadLine(), out maxSpeed))
+                {
+                    break;
+                }
+
+                Console.WriteLine("Invalid input! Please enter a valid speed.");
+            }
+
+            switch (vehicles_type)
+            {
+                case "1":
+                    FuelType fuel;
+                    while (true)
+                    {
+                        Console.WriteLine("Enter Fuel (1 - Gas, 2 - Diesel, 3 - Petrol):");
+                        if (int.TryParse(Console.ReadLine(), out int fuelValue) && Enum.IsDefined(typeof(FuelType), fuelValue))
+                        {
+                            fuel = (FuelType)fuelValue;
+                            break;
+                        }
+
+                        Console.WriteLine("Invalid input! Please enter a valid Fuel Type.");
+                    }
+
+                    Vehicles[index - 1] = new Car("Car", fuel, maxSpeed);
+                    break;
+                case "2":
+                    int capacity;
+                    while (true)
+                    {
+                        Console.WriteLine("Enter Capacity: ");
+                      
+                        if (int.TryParse(Console.ReadLine(), out capacity))
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Invalid input! Please enter a valid Capacity.");
+                    }
+                    Vehicles[index - 1] = new Bus("Bus" , capacity, maxSpeed);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice! No changes were made.");
+                    break;
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid Input");
+        }
     }
 }
+
 
 enum FuelType
-{
-    Gas,
-    Diesel,
-    Petrol
-}
-
-enum BodyType
-{
-    Sedan,
-    Coupe,
-    Universal
-}
-
-class Transport
-{
-    public  FuelType FuelType { get; set; }
-    public  BodyType BodyType { get; set; }
-
-    protected Transport(FuelType fuelType, BodyType bodyType)
     {
-        FuelType = fuelType;
-        BodyType = bodyType;
+        Gas = 1,
+        Diesel = 2,
+        Petrol = 3
     }
-}
 
-class Car : Transport
-{
-    public Car(FuelType fuel, BodyType body) : base(fuel, body)
+    class Transport
     {
+        public string Type { get; set; }
+        public int MaxSpeed { get; set; }
         
-    }
-}
+        protected Transport(string type, int maxspeed)
+        {
+            Type = type;
+            MaxSpeed = maxspeed;
+        }
 
-class Bus : Transport
-{
-    public int Capasity { get; set; }
-    
-    public Bus(FuelType fuel, BodyType body, int capasity  ) : base(fuel, body)
+        public virtual void ShowInfo()
+        {
+            Console.WriteLine($"Type: {Type}");
+            Console.WriteLine($"MaxSpeed: {MaxSpeed}");
+        }
+    }
+
+    class Car : Transport
     {
-        Capasity = capasity;
-    }
-}
+        public FuelType FuelType { get; set; }
 
+        public Car(string type, FuelType fuelType, int maxspeed) : base(type, maxspeed)
+        {
+            FuelType = fuelType;
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Fuel Type: {FuelType}");
+        }
+    }
+
+    class Bus : Transport
+    {
+        public int Capacity { get; set; }
+
+        public Bus(string type, int сapacity, int maxspeed) : base(type, maxspeed)
+        {
+            Capacity = сapacity;
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Capacity: {Capacity}");
+        }
+    }
