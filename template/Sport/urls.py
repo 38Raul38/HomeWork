@@ -1,5 +1,5 @@
 """
-URL configuration for Sport project.
+URL configuration for sport project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -15,14 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-import categories.views 
+from django.urls import include, path
+
+from categories import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("categories/", include("categories.")),
-    path('', categories.views.main, name='main'),
-    # path('football/', views.football),
-    # path('hockey/', views.hockey),
-    # path('basketball/', views.basketball),
+
+    path('', include('categories.urls')),
 ]

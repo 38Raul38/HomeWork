@@ -1,13 +1,13 @@
 from django.urls import path
 
-from . import views
-from .views import AboutPageView
+# from categories.views import Home, Football, Basketball, Hockey
+from categories import views
 
-app_name = 'categories'
+app_name = "categories"
 
 urlpatterns = [
-    path('', views.main, name='main'),
-    path('football/', views.football, name='football'),
-    path('hockey/', views.hockey, name='hockey'),
-    path('basketball/', views.basketball, name='basketball'),
+    path('', views.Home, name='home'),
+    path('football/', views.Football, name='football'),
+    path('basketball/', views.Basketball, name='basketball'),
+    path('hockey/', views.Hockey, name='hockey'),
 ]

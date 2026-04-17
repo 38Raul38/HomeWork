@@ -1,13 +1,15 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-def main(request):
-    return render(request, 'main.html')
 
-def football(request):
-    return render(request, 'football.html')
+def Home(request: HttpRequest) -> HttpResponse:
+    return render(request, "categories/home.html")
 
-def hockey(request):
-    return render(request, 'hockey.html')
+def Football(request: HttpRequest) -> HttpResponse:
+    return render(request, "categories/football.html")
 
-def basketball(request):
-    return render(request, 'basketball.html')
+def Basketball(request: HttpRequest) -> HttpResponse:
+    return render(request, "categories/basketball.html")
+
+def Hockey(request: HttpRequest) -> HttpResponse:
+    return render(request, "categories/hockey.html")
