@@ -1,21 +1,5 @@
 from django.db import models
-
-class Article(models.Model):
-    author = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='article_pictures/') #(лучше хранить на https://cloudinary.com/)
-    content = models.TextField()
-    likes = models.IntegerField(default=0)  #надо сделать так, чтобы пользователь мог поставить только один лайк или дизлайк, и не мог менять свое мнение после этого. Для этого нужно создать отдельную модель для хранения информации о том, кто поставил лайк или дизлайк.
-    dislikes = models.IntegerField(default=0) #надо сделать так, чтобы пользователь мог поставить только один лайк или дизлайк, и не мог менять свое мнение после этого. Для этого нужно создать отдельную модель для хранения информации о том, кто поставил лайк или дизлайк. 
-    title = models.CharField(max_length=200)
-    published_date = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'Article'
-        verbose_name_plural = 'Articles'
-        ordering = ['-published_date']
-
-    def __str__(self):
-        return self.title
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -29,3 +13,61 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Article(models.Model):
+    picture = models.ImageField(upload_to='article_pictures/') #(лучше хранить на https://cloudinary.com/)
+    content = models.TextField()
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    published_date = models.DateTimeField(auto_now_add=True)
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='articles'
+    )
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.PROTECT,
+        related_name='articles'
+    )
+
+    class Meta:
+        verbose_name = 'Article'
+        verbose_name_plural = 'Articles'
+        ordering = ['-published_date']
+
+    def __str__(self):
+        return self.title
+
+
+class Reaction(models.Model):
+
+    LIKE = 'like'
+    DISLIKE = 'dislike'
+
+    REACTION_CHOICES = [
+        (LIKE, 'Like'),
+        (DISLIKE, 'Dislike'),
+    ]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='reactions'
+    )
+
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name='reactions'
+    )
+
+    reaction = models.CharField(max_length=7, choices=REACTION_CHOICES)
+
+    class Meta:
+        verbose_name = 'Reaction'
+        verbose_name_plural = 'Reactions'
+        unique_together = ('article', 'user')
