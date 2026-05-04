@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 
 from article.models import Article
+from article.forms import ArticleForm
 
 def article_list(request: HttpRequest) -> HttpResponse:
     articles = Article.objects.all() #можно добавить пагинацию, фильтрацию по категории и т.д.
