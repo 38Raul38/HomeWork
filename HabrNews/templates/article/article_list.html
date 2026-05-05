@@ -1,1 +1,62 @@
- 
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title|default:"Articles" }} - HabrNews{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h2>{{ page_title|default:"Latest Articles" }}</h2>
+    </div>
+
+    {% for article in articles %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card article-card shadow-sm h-100">
+            {% if article.picture %}
+            <img src="{{ article.picture.url }}" class="card-img-top article-cover" alt="Cover">
+            {% else %}
+            <div
+                class="card-img-top article-cover bg-secondary text-white d-flex align-items-center justify-content-center">
+                <span>No Cover Image</span>
+            </div>
+            {% endif %}
+
+            <div class="card-body d-flex flex-column">
+                <div class="mb-2">
+                    <span class="badge bg-primary">{{ article.category }}</span>
+                    <small class="text-muted float-end">{{ article.published_date|date:"M d, Y" }}</small>
+                </div>
+                <h5 class="card-title">
+                    <a href="{% url 'article:article_detail' article.slug %}" class="text-decoration-none text-dark">
+                        {{ article.title }}
+                    </a>
+                </h5>
+                <div class="mt-auto pt-3 border-top d-flex flex-column gap-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">By {{ article.author.username }}</small>
+                        <span class="text-warning fw-bold">★ {{ article.rating_avg }}</span>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'article:rate_article' article.slug %}" method="POST" class="d-flex w-100">
+                        {% csrf_token %}
+                        <select name="value" class="form-select form-select-sm me-2" required>
+                            <option value="" disabled selected>Rate...</option>
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Good</option>
+                            <option value="3">3 - Okay</option>
+                            <option value="2">2 - Bad</option>
+                            <option value="1">1 - Terrible</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Rate</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">No articles found.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

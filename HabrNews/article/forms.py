@@ -6,12 +6,13 @@ from article.models import Article
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'content', 'author']
+        fields = ['title', 'content', 'picture', 'category']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
-            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }
+
 
 # def clean_title(self):
 #     title = self.cleaned_data.get('title')

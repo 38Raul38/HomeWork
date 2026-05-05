@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Category, Reaction
+from .models import Article, Rating
 
 admin.site.register(Article)
-admin.site.register(Category)
-admin.site.register(Reaction)
+admin.site.register(Rating)
